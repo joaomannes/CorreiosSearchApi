@@ -17,6 +17,9 @@ namespace CorreiosSearchRest.API.Models
 
         public static ConsultaCepModel FromCorreiosResponse(consultaCEPResponse response)
         {
+            if (response?.@return == null)
+                return null;
+
             return new ConsultaCepModel
             {
                 Bairro = response.@return.bairro,

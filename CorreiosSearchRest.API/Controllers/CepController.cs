@@ -33,9 +33,9 @@ namespace CorreiosSearchRest.API.Controllers
                 var response = ConsultaCepModel.FromCorreiosResponse(consulta);
 
                 return Ok(response);
-            } catch
+            } catch(Exception ex)
             {
-                return BadRequest("Erro ao consultar o cep informado");
+                return BadRequest($"Erro ao consultar o cep informado: {ex.Message}");
             }
             
         }
