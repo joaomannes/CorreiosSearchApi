@@ -1,5 +1,6 @@
 # CorreiosSearchApi
-API .NET CORE que realiza consultas no webservice dos Correios
+API .NET CORE que realiza consultas no webservice dos Correios. Ideal para uso interno, podendo ser facilmente integrada com seu sistema.
+Respostas podem sem retornadas em JSON (Accept: application/json ou XML(Accept: application/xml), sendo o retorno padrão via JSON.
 
 
 ## Instalação
