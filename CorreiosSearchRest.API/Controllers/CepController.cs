@@ -22,7 +22,7 @@ namespace CorreiosSearchRest.API.Controllers
         public async Task<IActionResult> Index([FromRoute]string cep)
         {
             if (string.IsNullOrWhiteSpace(cep))
-                return BadRequest("Informe o CEP a ser consultado");
+                return Error("Informe o CEP a ser consultado");
 
             try
             {
@@ -30,14 +30,19 @@ namespace CorreiosSearchRest.API.Controllers
 
                 var consulta = await correios.consultaCEPAsync(cep.Replace("-", ""));
 
-                var response = ConsultaCepModel.FromCorreiosResponse(consulta);
+                var response = consulta?.@return != null ? ConsultaCepModel.FromCorreiosResponse(consulta) : throw new Exception("Erro buscando CEP");
 
-                return Ok(response);
+                return StatusCode(200, response);
             } catch(Exception ex)
             {
-                return BadRequest($"Erro ao consultar o cep informado: {ex.Message}");
+                return Error($"Erro ao consultar o cep informado: {ex.Message}");
             }
             
+        }
+
+        private IActionResult Error(string message)
+        {
+            return BadRequest(new { erro = message });
         }
     }
 }
